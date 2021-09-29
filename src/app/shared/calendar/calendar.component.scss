@@ -6,10 +6,10 @@ div {
   }
 .calendar-container {
     //width: 350px;
-    margin:1rem;
-    padding: .5rem;
+    //margin:1rem;
+    //padding: .5rem;
     border: solid 1px #eaeaea;
-    box-shadow: 3px 3px 20px #e4e4e4;
+    box-shadow: 5px 0px 20px 0px #e4e4e4;
 }
 
 .header {
@@ -127,4 +127,16 @@ ol li.full {
     line-height:18px;
     border-radius:50%;
     box-shadow:0 0 1px #333;
+ }
+
+
+ // NOTES
+ .main-container {
+     // background-color: blue;
+ }
+ .events-container {
+     //background-color: red;
+     height: 300px;
+     border: solid 1px #eaeaea;
+     box-shadow: 3px 3px 20px #e4e4e4;
  }

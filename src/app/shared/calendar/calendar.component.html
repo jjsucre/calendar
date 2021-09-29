@@ -1,25 +1,40 @@
-<div class="calendar-container">
-    <div class="header">
-        <div class="month">{{dateSelect | date:'MMMM, yyyy'}}</div>
-        <div class ="buttons">
-            <div class="btn-prev" (click)="changeMonth('Prev')"><img src="../../../assets/angle-solid.svg" alt="" ></div>
-            <div class="btn-next" (click)="changeMonth('Next')"><img src="../../../assets/angle-solid.svg" alt="" ></div>
+<div class="main-container">
+    <div class="calendar-container">
+        <div class="header">
+            <div class="month">{{dateSelect | date:'MMMM, yyyy'}}</div>
+            <div class ="buttons">
+                <div class="btn-prev" (click)="changeMonth('Prev')"><img src="../../../assets/angle-solid.svg" alt="" ></div>
+                <div class="btn-next" (click)="changeMonth('Next')"><img src="../../../assets/angle-solid.svg" alt="" ></div>
+            </div>
+        </div>
+        <div class="week">
+            <ol>
+                <li *ngFor="let day of weekDays">{{day | slice:0:3}}</li>
+            </ol>
+        </div>
+        <div class="days">
+            <ol>
+                <li  [style.gridColumnStart]="first ? day?.index : 'auto'" id ="day"
+                    *ngFor="let day of monthSelected;let first = first"
+                    (click)="clickDay(day)" 
+                    data-badge=""
+                    [ngClass]="{ 'selected': dateSelected == day.value, 'active': currentDay == day.value && newMonth  == currentMonth, 'badge1': day.schedules.length > 0 }">
+                    <span  >{{day?.value}}</span>
+                </li>
+            </ol>
         </div>
     </div>
-    <div class="week">
-        <ol>
-            <li *ngFor="let day of weekDays">{{day | slice:0:3}}</li>
-        </ol>
-    </div>
-    <div class="days">
-        <ol>
-            <li  [style.gridColumnStart]="first ? day?.index : 'auto'" id ="day"
-                *ngFor="let day of monthSelected;let first = first"
-                (click)="clickDay(day)" 
-                data-badge=""
-                [ngClass]="{ 'selected': dateSelected == day.value, 'active': currentDay == day.value && newMonth  == currentMonth, 'badge1': day.schedules.length > 0 }">
-                <span  >{{day?.value}}</span>
-            </li>
-        </ol>
+    <div class="events-container">
+        <div>
+
+        </div>
+        <div class="events-list">
+            <mat-selection-list #shoes [multiple]="false">
+                <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
+                  {{shoe}}
+                </mat-list-option>
+              </mat-selection-list>
+        </div>
     </div>
 </div>
+

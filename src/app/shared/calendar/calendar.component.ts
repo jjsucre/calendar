@@ -13,6 +13,7 @@ interface scheduleData {
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit, OnChanges {
+  public typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   public monthNames =  moment.months();
   public weekDays = moment.weekdays();
   public currentYear = moment().format('YYYY');
@@ -24,7 +25,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   public dateSelect: any;
   public dateValue: any;
   public dateSelected = 0;
-  @Input() scheduleData = [];
+  @Input() scheduleData: any = [];
   @Input() flag: boolean = false;
   constructor() {
     this.getDaysFromDate(this.currentMonth, this.currentYear);

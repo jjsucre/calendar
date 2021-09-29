@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ScheduleComponent } from './shared/schedule/schedule.component';
+import { MatListModule } from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,6 +17,7 @@ import { ScheduleComponent } from './shared/schedule/schedule.component';
     BrowserModule,
     BrowserAnimationsModule,
     MatIconModule,
+    MatListModule
   ],
   providers: [],
   exports: [
