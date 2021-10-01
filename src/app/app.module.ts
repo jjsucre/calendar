@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CalendarComponent } from '../app/shared/calendar/calendar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ScheduleComponent } from './shared/schedule/schedule.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -17,7 +16,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   declarations: [
     AppComponent,
     CalendarComponent,
-    ScheduleComponent,
     ModalEventsComponent
   ],
   imports: [

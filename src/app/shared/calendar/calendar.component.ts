@@ -30,7 +30,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log("listo 1");
+
   }
   ngAfterViewInit(): void {
     this.flag = true;
@@ -38,7 +38,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes.scheduleData) {
-      if (!changes.scheduleData.isFirstChange() && changes.scheduleData.currentValue.length > 0) {
+      if (!changes.scheduleData.isFirstChange() && changes.scheduleData.currentValue.length > 0 && this.flag) {
         this.objScheduleData = this.scheduleData;
         this.loadData(this.objScheduleData);
       }
@@ -55,6 +55,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       day = parseInt(day) + 1;
       const dayObject = moment(`${year}-${month}-${day}`);
       return {
+        year: dayObject.format("YYYY"),
         name: dayObject.format("dddd"),
         month: dayObject.format("MM"),
         value: day,
@@ -81,6 +82,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.dateValue = objectDate;
     this.objEvents =  day.schedules;
     this.daySelected = day.value
+    this.currentYear = day.year;
     this.monthSelected = this.dateSelect.format('MM')
   }
   loadData(scheduleData: any) {

@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
   rootURL = '/api';
 
-  getEvents() {
-    return this.http.get(this.rootURL + '/events');
+  getEvents(): Observable<any> {
+    return this._http.get(this.rootURL + '/events');
   }
 }

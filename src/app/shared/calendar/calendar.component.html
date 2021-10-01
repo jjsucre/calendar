@@ -18,7 +18,9 @@
                     *ngFor="let day of dataMonth;let first = first"
                     (click)="dayClicked(day)" 
                     data-badge=""
-                    [ngClass]="{ 'selected': daySelected == day.value && monthSelected  == day.month, 'active': currentDay == day.value && newMonth  == currentMonth, 'badge1': day.schedules.length > 0 }">
+                    [ngClass]="{'selected': daySelected == day.value && monthSelected  == day.month && day.year == currentYear,
+                                'active': currentDay == day.value && newMonth  == currentMonth && day.year == newYear,
+                                'badge1': day.schedules.length > 0 }">
                     <span  >{{day?.value}}</span>
                 </li>
             </ol>
