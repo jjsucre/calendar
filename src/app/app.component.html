@@ -32,8 +32,9 @@
 
     <span>{{ title }} app is running!</span>
   </div>
-  <app-calendar style=""
-    [scheduleData] = "dateObj.matches"
+  <app-calendar 
+    (onReady) = "onReady()" 
+    [scheduleData] = "dateObj"
   >
   </app-calendar>
 </div>

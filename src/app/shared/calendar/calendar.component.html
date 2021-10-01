@@ -3,8 +3,8 @@
         <div class="header">
             <div class="month">{{dateSelect | date:'MMMM, yyyy'}}</div>
             <div class ="buttons">
-                <div class="btn-prev" (click)="changeMonth('Prev')"><img src="../../../assets/angle-solid.svg" alt="" ></div>
-                <div class="btn-next" (click)="changeMonth('Next')"><img src="../../../assets/angle-solid.svg" alt="" ></div>
+                <div class="btn-prev" matTooltip="Previous Month"><i><mat-icon   (click)="changeMonth('Prev')" >keyboard_arrow_up</mat-icon></i></div>
+                <div class="btn-next"  matTooltip="Next Month"><i><mat-icon  (click)="changeMonth('Next')">keyboard_arrow_down</mat-icon></i></div>
             </div>
         </div>
         <div class="week">
@@ -15,26 +15,34 @@
         <div class="days">
             <ol>
                 <li  [style.gridColumnStart]="first ? day?.index : 'auto'" id ="day"
-                    *ngFor="let day of monthSelected;let first = first"
-                    (click)="clickDay(day)" 
+                    *ngFor="let day of dataMonth;let first = first"
+                    (click)="dayClicked(day)" 
                     data-badge=""
-                    [ngClass]="{ 'selected': dateSelected == day.value, 'active': currentDay == day.value && newMonth  == currentMonth, 'badge1': day.schedules.length > 0 }">
+                    [ngClass]="{ 'selected': daySelected == day.value && monthSelected  == day.month, 'active': currentDay == day.value && newMonth  == currentMonth, 'badge1': day.schedules.length > 0 }">
                     <span  >{{day?.value}}</span>
                 </li>
             </ol>
         </div>
     </div>
     <div class="events-container">
-        <div>
-
+        <div class="title">
+            <div><h1>{{dateValue | date:'EE, MMM d, y'}}</h1></div>
+            <div class="icon">
+                <mat-icon   (click) ="openDialog('')"
+                            aria-hidden="false"
+                            aria-label="Add Event"
+                            matTooltip="New Event">
+                            add</mat-icon>
+            </div>
         </div>
         <div class="events-list">
-            <mat-selection-list #shoes [multiple]="false">
-                <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
-                  {{shoe}}
-                </mat-list-option>
-              </mat-selection-list>
+            <ol>
+                <li (click) = openDialog(item) *ngFor="let item of objEvents" [value]="item.index">
+                    {{item.title}}
+                </li>
+            </ol>
         </div>
     </div>
 </div>
+
 

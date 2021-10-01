@@ -20,77 +20,78 @@ div {
     align-items: center;
     align-content: center;
     background-color: white;
+    .month {
+        padding-left: 10px;
+        font-weight: bold;
+    }
+    h1 {
+        width: 100%;
+        font-size: 15px;
+    }
+    .buttons {
+        display: grid;
+        grid-template-columns: 40% auto;
+        width: 100px;
+        mat-icon {
+            cursor: pointer;
+            font-size: 40px;
+            color:#616161;
+            :hover {
+                cursor: pointer;
+            }
+        }
+    }
 }
-.header .month {
-    padding-left: 10px;
-    font-weight: bold;
-}
-.header h1 {
-    width: 100%;
-    font-size: 15px;
-}
-.header .buttons {
-    display: grid;
-    grid-template-columns: auto auto;
-    width: 100px;
-}
-.header .buttons .btn-next img {
-   transform: rotate(180deg);
-}
-.header .buttons img {
-    height: 30px;
-}
-.header .buttons img:hover {
-    cursor: pointer;
-}
-.btn-prev {
-    font-size: 10px;
-}
+
+
 .week {
-    //background-color: #EEEEEE;
     height: 30px;
     margin-top: 10px;
     margin-bottom: 10px;
+    ol {
+        display: grid;
+        grid-template-columns: repeat(7,1fr);
+        font-size: 14px;
+        color:#212121;
+        font-weight: bold;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        line-height: 30px;
+    }
 }
-.week ol {
-    display: grid;
-    grid-template-columns: repeat(7,1fr);
-    font-size: 14px;
-    color:#212121;
-    font-weight: bold;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    line-height: 30px;
-}
+
 
 .days {
     background-color: white;
+    ol{
+        position: relative;
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(7,1fr);
+        grid-template-rows: repeat(6,1fr);
+        grid-column-gap: 5px;
+        grid-row-gap: 5px;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        li{
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            transition: 0.3s;
+            cursor: pointer;
+            :hover:not(.selected):not(.active){
+                background-color: #EEEEEE;
+                box-shadow: 5px 5px 10px #e4e4e4;
+            }
+        }
+    }
 }
 
-.days ol{
-    position: relative;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(7,1fr);
-    grid-template-rows: repeat(6,1fr);
-    grid-column-gap: 5px;
-    grid-row-gap: 5px;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-.days ol li{
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    transition: 0.3s;
-    cursor: pointer;
-}
-.days ol li:hover:not(.selected):not(.active){
-    background-color: #EEEEEE;
-    box-shadow: 5px 5px 10px #e4e4e4;
-}
+
+
+
 
 ol li.selected {
     box-shadow: inset 0 0 0 3px #039BE5;
@@ -104,13 +105,9 @@ ol li.selected.active {
     box-shadow: inset 0 0 0 3px #000000;
 }
 
-ol li.full {
-    //box-shadow:  0 3px 0 0 #039BE5;
-    //border-bottom: 1px solid #BDBDBD;
-}
 
 
-//  RIBBON 
+
 .badge1 {
     position:relative;
  }
@@ -131,12 +128,62 @@ ol li.full {
 
 
  // NOTES
- .main-container {
-     // background-color: blue;
- }
+
  .events-container {
-     //background-color: red;
+     display: grid;
+     grid-template-rows: 20% 80% ;
      height: 300px;
      border: solid 1px #eaeaea;
      box-shadow: 3px 3px 20px #e4e4e4;
+     .title {
+        display: grid;
+        grid-template-columns: 85% 15%;
+        .icon {
+            text-align: center;
+            line-height: 60px;
+            mat-icon {
+                font-size: 30px;
+                font-weight: bolder;
+                color:#616161;
+            }
+            :hover{
+                color:#212121;
+                cursor: pointer;
+            }
+        }
+        h1 {
+            padding-left: 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 20px;
+            color:#757575;
+        }
+     }
+     .events-list {
+         overflow: auto;
+     }
+     ol{
+        font-size: 14px;
+        color:#212121;
+        font-weight: bold;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        line-height: 30px;
+     }
+     ol li {
+        height: 70px;
+        padding-left: 10px;
+        line-height: 70px;
+        text-align: left;;
+        background-color: white ;
+        color:#424242;
+        border-left: 5px solid red;
+        margin-bottom: 5px;
+     }
+     ol li:hover {
+        background-color:#E0E0E0;
+        cursor: pointer;
+    }
  }
+

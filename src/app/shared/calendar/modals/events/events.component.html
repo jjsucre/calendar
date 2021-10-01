@@ -1,0 +1,62 @@
+<form [formGroup]= "frmMain"  (ngSubmit)="!frmMain.invalid && save(frmMain.value)" class="modal-header"  class="example-container-modal">
+    <div fxLayout.xs="row" fxLayoutAlign="space-between center" fxLayoutAlign.xs="space-between center" class="modal-header">
+      <div fxFlex="10%" *ngIf =mobile> 
+          <button mat-icon-button
+                  type="button" 
+                  mat-dialog-close>
+                  <mat-icon  >clear</mat-icon></button>
+      </div>
+      <div fxFlex="80%" *ngIf =mobile> <h1 align="center" mat-dialog-title>{{modalTitle}}</h1></div>
+      <div fxFlex="100%" *ngIf =!mobile> <h1 mat-dialog-title>{{modalTitle}}</h1></div>
+      <div fxFlex="25%" *ngIf =mobile> 
+        <button 
+                mat-button
+                mat-icon-button
+                (click) ="delete()"
+                [disabled]="!data.item.edit"
+                color="warn">
+                <mat-icon>delete_forever</mat-icon>
+                </button>
+        <button mat-button type="submit"
+                mat-icon-button
+                color="primary">
+                <mat-icon  >done</mat-icon>
+                </button>
+    </div>
+  </div>
+          <mat-dialog-content fxLayout="column">
+                <mat-form-field fxFlex="10">
+                        <input  formControlName="date"
+                                placeholder="Date"
+                                autocomplete="off"
+                                matInput>
+                </mat-form-field>
+                <mat-form-field fxFlex="20">
+                        <input  formControlName="title"
+                                placeholder="Title"
+                                autocomplete="off"
+                                matInput>
+                                <mat-hint align="start">Event Title</mat-hint>
+                                <mat-error *ngIf="f.title.errors?.required">This field is required </mat-error>
+                </mat-form-field>
+          </mat-dialog-content>
+          <mat-dialog-actions *ngIf =!mobile >
+                <div>
+                        <button mat-raised-button
+                                mat-button type="submit"
+                                color="primary" >
+                                Save</button>
+                        <button mat-raised-button 
+                                mat-dialog-close>
+                                Cancel</button>
+                </div>
+                <div >
+                        <button
+                                (click) ="delete()"
+                                color="warn"
+                                [disabled]="!data.item.edit"
+                                mat-raised-button>
+                                Delete</button>
+                </div>
+          </mat-dialog-actions>
+  </form>
