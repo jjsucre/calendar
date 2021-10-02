@@ -47,6 +47,7 @@ export class ModalEventsComponent implements OnInit {
     });
   }
   save(form:eventData) {
+    form.date = this.formData.date;
     form.team1 = form.title;
     form.team1 = form.title;
     this.formSaved.emit(form);

@@ -1,25 +1,35 @@
 <div class="main-container">
     <div class="calendar-container">
-        <div class="header">
-            <div class="month">{{dateSelect | date:'MMMM, yyyy'}}</div>
-            <div class ="buttons">
-                <div class="btn-prev" matTooltip="Previous Month"><i><mat-icon   (click)="changeMonth('Prev')" >keyboard_arrow_up</mat-icon></i></div>
-                <div class="btn-next"  matTooltip="Next Month"><i><mat-icon  (click)="changeMonth('Next')">keyboard_arrow_down</mat-icon></i></div>
+        <div class="header" >
+            <div  *ngIf ="flagDays" class="header-month" (click)=changeToMonth()>{{dateSelect | date:'MMMM, yyyy'}}</div>
+            <div  *ngIf ="flagMonths" class="header-years"  (click)=changeToDays()>{{dateSelect | date:'yyyy'}}</div>
+            <div class ="buttons" >
+                <div class="btn-prev" matTooltip="Previous"><i><mat-icon   (click)="flagDays && changeMonth('Prev'); flagMonths && changeYear('Prev')" >keyboard_arrow_up</mat-icon></i></div>
+                <div class="btn-next"  matTooltip="Next"><i><mat-icon  (click)="flagDays && changeMonth('Next'); flagMonths && changeYear('Next')">keyboard_arrow_down</mat-icon></i></div>
             </div>
         </div>
-        <div class="week">
-            <ol>
+        <div class="week" >
+            <ol *ngIf ="!flagMonths">
                 <li *ngFor="let day of weekDays">{{day | slice:0:3}}</li>
             </ol>
         </div>
-        <div class="days">
+        <div class="months" *ngIf ="flagMonths">
+            <ol>
+                <li  [style.gridColumnStart]="'auto'" id ="day"
+                    (click)="monthClicked(item)" 
+                    *ngFor="let item of monthNames;let first = first">
+                    <span  >{{item | slice:0:3}}</span>
+                </li>
+            </ol>
+        </div>
+        <div class="days" *ngIf ="flagDays">
             <ol>
                 <li  [style.gridColumnStart]="first ? day?.index : 'auto'" id ="day"
                     *ngFor="let day of dataMonth;let first = first"
-                    (click)="dayClicked(day)" 
+                    (click)="dayClicked(day)"
                     data-badge=""
-                    [ngClass]="{'selected': daySelected == day.value && monthSelected  == day.month && day.year == currentYear,
-                                'active': currentDay == day.value && newMonth  == currentMonth && day.year == newYear,
+                    [ngClass]="{'selected': daySelected == day.value && monthSelected  == day.month && day.year == yearSelected,
+                                'active': currentDay == day.value && newMonth  == currentMonth && day.year == currentYear,
                                 'badge1': day.schedules.length > 0 }">
                     <span  >{{day?.value}}</span>
                 </li>
@@ -39,7 +49,7 @@
         </div>
         <div class="events-list">
             <ol>
-                <li (click) = openDialog(item) *ngFor="let item of objEvents" [value]="item.index">
+                <li matTooltip="{{item.title}}" (click) = openDialog(item) *ngFor="let item of objEvents" [value]="item.index">
                     {{item.title}}
                 </li>
             </ol>

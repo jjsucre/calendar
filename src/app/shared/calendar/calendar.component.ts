@@ -15,10 +15,11 @@ export class CalendarComponent implements OnInit, OnChanges {
   public monthNames =  moment.months();  weekDays = moment.weekdays();
   public currentYear = moment().format('YYYY');  currentMonth = moment().format('MM');  currentDay = moment().format('D');
   public dataMonth: any  = []; dateSelect: any; public dateValue: any; public objEvents: any = []
-  public newYear = this.currentYear; newMonth = this.currentMonth;
-  public monthSelected = this.currentMonth;
+  public newYear = this.currentYear; newMonth = this.currentMonth; yearValue: number = parseInt(this.currentYear);
+  public monthSelected = this.currentMonth; public yearSelected = this.currentMonth;
   public daySelected: number = 0; public objDay: any = [] ;
   public flagToday = true;
+  public flagMonths = false; flagYears = false; flagDays = true;
   public objScheduleData: any = []
   public ready = false;
   @Input() scheduleData: any = [];
@@ -68,10 +69,11 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   changeMonth(action: string) {
     const newDate =  action === 'Prev' ? this.dateSelect.clone().subtract(1, "month"):  this.dateSelect.clone().add(1, "month");
-    this.geDays(newDate.format("MM"), newDate.format("YYYY"));
-    this.newMonth = newDate.format("MM");
-    this.newYear =  newDate.format("YYYY");
-    this.loadData(this.objScheduleData)
+    this.updateData(newDate);
+  }
+  changeYear(action: string) {
+    const newDate =  action === 'Prev' ? this.dateSelect.clone().subtract(1, "year"):  this.dateSelect.clone().add(1, "year");
+    this.updateData(newDate);
   }
 
   dayClicked(day: any) {
@@ -82,9 +84,29 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.dateValue = objectDate;
     this.objEvents =  day.schedules;
     this.daySelected = day.value
-    this.currentYear = day.year;
+    this.yearSelected = day.year;
     this.monthSelected = this.dateSelect.format('MM')
   }
+  deactivateAll() {
+    this.flagDays = false;
+    this.flagMonths = false;
+  }
+  changeToMonth() {
+    this.deactivateAll();
+    this.flagMonths = true;
+  }
+  changeToDays() {
+    this.deactivateAll();
+    this.flagDays = true;
+  }
+  monthClicked(month: any) {
+    this.deactivateAll();
+    const monthIndex = moment().month(month).format("M");
+    const newDate = moment(`${this.newYear}-${monthIndex}-${'01'}`);
+    this.updateData(newDate);
+    this.flagDays = true;
+  }
+
   loadData(scheduleData: any) {
     const obj = scheduleData.filter((item: any)  => {
       item.day  = moment(item.date).format('D');
@@ -93,6 +115,13 @@ export class CalendarComponent implements OnInit, OnChanges {
     });
     this.setSchedule(obj);
   }
+  updateData(newDate:any) {
+    this.geDays(newDate.format("MM"), newDate.format("YYYY"));
+    this.newMonth = newDate.format("MM");
+    this.newYear =  newDate.format("YYYY");
+    this.loadData(this.objScheduleData)
+  }
+
   setSchedule(data : any) {
     this.dataMonth.forEach((item: any) => {
         const obj = data.filter((element: any) => element.day == item.value);
